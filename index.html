@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>High Mountain Group · Sulaymaniyah</title>
+    <meta name="description" content="High Mountain Group fuel stations in Sulaymaniyah. Goizha and Bakhtyary, both on Malik Mahmud Ring Road. Open 24 hours, with Café Bonjour." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='788 282 270 213'%3E%3Crect x='788' y='282' width='270' height='213' fill='%23000000'/%3E%3Cpath fill='%23FF2929' d='M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z'/%3E%3Cpath fill='%23FF2929' d='M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#000000",
+                        paper: "#ffffff",
+                        scarlet: "#FF2929",
+                        gold: "#FF2929"
+                    },
+                    fontFamily: {
+                        display: ["Syne", "Noto Sans Arabic", "sans-serif"],
+                        sans: ["Outfit", "Noto Sans Arabic", "sans-serif"],
+                        logo: ["Montserrat", "Noto Sans Arabic", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background: #000000; }
+        [dir="rtl"] body { font-family: "Noto Sans Arabic", Outfit, sans-serif; }
+        .mark { display: block; }
+        .pattern {
+            background-color: #ffffff;
+            background-image: url("images/pattern.png");
+            background-repeat: repeat;
+            background-size: 520px auto;
+        }
+        #topbar {
+            animation: header-drift 16s ease-in-out infinite alternate;
+            transition: transform .4s ease, background-color .15s, border-color .15s;
+        }
+        #topbar.nav-away { transform: translateY(-110%); }
+        @keyframes header-drift {
+            from { background-position: 0 0; }
+            to { background-position: -160px 28px; }
+        }
+        .nav-solid { background-color: rgba(255, 255, 255, .94); backdrop-filter: blur(16px); border-color: rgba(0, 0, 0, .08); }
+        .reveal { opacity: 0; transform: translateY(18px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+        .reveal-2 { animation-delay: .12s; }
+        .reveal-3 { animation-delay: .24s; }
+        @keyframes rise { to { opacity: 1; transform: none; } }
+        .rise { opacity: 0; transform: translateY(40px); transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1); }
+        .rise.in { opacity: 1; transform: none; }
+        .rise :is(h1, h2, h3, p) {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+        }
+        .rise.in :is(h1, h2, h3, p) { opacity: 1; transform: none; }
+        .rise-2 { transition-delay: .12s; }
+        .rise-3 { transition-delay: .22s; }
+        #hero-photo { transform: scale(1.14); will-change: transform; }
+        #contact { scroll-margin-top: 7.5rem; }
+        #intro {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: grid;
+            place-items: center;
+            background-color: #ffffff;
+            background-image: url("images/pattern.png");
+            background-repeat: repeat;
+            background-size: 520px auto;
+            animation: intro-leave .55s ease 2.35s forwards;
+        }
+        #intro .lockup { display: flex; align-items: center; gap: 14px; }
+        #intro .mark { width: 96px; height: 76px; }
+        #intro .stroke {
+            fill: none;
+            stroke: #FF2929;
+            stroke-width: 7;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            animation: intro-draw 1.05s ease forwards;
+        }
+        #intro .stroke.base { animation-delay: .42s; }
+        #intro .solid { opacity: 0; animation: intro-fade .4s ease 1.25s forwards; }
+        #intro .words {
+            opacity: 0;
+            clip-path: inset(0 100% 0 0);
+            font-size: 28px;
+            animation: intro-write .55s ease 1.45s forwards;
+        }
+        @keyframes intro-draw { to { stroke-dashoffset: 0; } }
+        @keyframes intro-fade { to { opacity: 1; } }
+        @keyframes intro-write { to { opacity: 1; clip-path: inset(0 0 0 0); } }
+        @keyframes intro-leave { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal, .rise, .rise :is(h1, h2, h3, p) { opacity: 1; transform: none; animation: none; transition: none; }
+            #topbar { animation: none; transition: none; }
+            #hero-photo { transform: none; }
+            #intro { display: none; }
+        }
+        .menu-open { transform: none; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "GasStation",
+                "name": "High Mountain Goizha",
+                "image": "images/station.jpg",
+                "telephone": "+9647701521683",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Malik Mahmud Ring Road, Goizha",
+                    "addressLocality": "Sulaymaniyah",
+                    "addressRegion": "Kurdistan Region",
+                    "addressCountry": "IQ"
+                },
+                "geo": { "@type": "GeoCoordinates", "latitude": 35.561453, "longitude": 45.473316 },
+                "openingHours": "Mo-Su 00:00-24:00",
+                "sameAs": [
+                    "https://www.instagram.com/highmountaingroup/",
+                    "https://www.facebook.com/hmgr.org/",
+                    "https://www.tiktok.com/@highmountain24",
+                    "https://hmgr.org/"
+                ]
+            },
+            {
+                "@type": "GasStation",
+                "name": "High Mountain Bakhtyary",
+                "telephone": "+9647701521683",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Malik Mahmud Ring Road, Bakhtyary",
+                    "addressLocality": "Sulaymaniyah",
+                    "addressRegion": "Kurdistan Region",
+                    "addressCountry": "IQ"
+                },
+                "geo": { "@type": "GeoCoordinates", "latitude": 35.5673544, "longitude": 45.3903206 },
+                "openingHours": "Mo-Su 00:00-24:00"
+            }
+        ]
+    }
+    </script>
+</head>
+<body class="bg-ink text-paper font-sans antialiased">
+    <div id="intro" aria-hidden="true">
+        <div class="lockup">
+            <svg class="mark" viewBox="788 282 270 213">
+                <path class="stroke" pathLength="1" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                <path class="stroke base" pathLength="1" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                <g class="solid">
+                    <path fill="#FF2929" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                    <path fill="#FF2929" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                </g>
+            </svg>
+            <span class="words font-logo font-extrabold leading-[0.88] tracking-[-0.03em] text-ink">
+                <span class="block" data-en="HIGH" data-ckb="های" data-ar="هاي">HIGH</span>
+                <span class="block" data-en="MOUNTAIN" data-ckb="ماونتن" data-ar="ماونتن">MOUNTAIN</span>
+            </span>
+        </div>
+    </div>
+    <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-3 focus:py-2 focus:text-ink" href="#top">Skip to content</a>
+
+    <header id="topbar" class="pattern fixed inset-x-0 top-0 z-40 border-b border-black/10 text-ink transition-colors">
+        <div class="mx-auto flex h-24 max-w-6xl items-center justify-between gap-4 px-5">
+            <a href="#top" class="flex items-center gap-3" aria-label="High Mountain">
+                <svg class="mark h-16 w-[4.4rem] shrink-0" viewBox="788 282 270 213" aria-hidden="true">
+                    <path fill="#FF2929" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                    <path fill="#FF2929" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                </svg>
+                <span class="font-logo text-xl font-extrabold leading-[0.88] tracking-[-0.03em]">
+                    <span class="block" data-en="HIGH" data-ckb="های" data-ar="هاي">HIGH</span>
+                    <span class="block" data-en="MOUNTAIN" data-ckb="ماونتن" data-ar="ماونتن">MOUNTAIN</span>
+                </span>
+            </a>
+            <nav class="hidden items-center gap-8 text-lg text-ink/70 md:flex">
+                <a class="hover:text-ink" href="#station" data-en="Station" data-ckb="بەنزینخانە" data-ar="المحطة">Station</a>
+                <a class="hover:text-ink" href="#services" data-en="Coffee" data-ckb="قاوە" data-ar="القهوة">Coffee</a>
+                <a class="hover:text-ink" href="#group" data-en="The group" data-ckb="گرووپ" data-ar="المجموعة">The group</a>
+                <a class="hover:text-ink" href="#visit" data-en="Visit" data-ckb="سەردان" data-ar="زيارة">Visit</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <div class="hidden text-sm uppercase tracking-[0.18em] text-ink/50 sm:flex" role="group" aria-label="Language">
+                    <button type="button" data-lang="en" class="px-2 text-ink">EN</button>
+                    <span aria-hidden="true">/</span>
+                    <button type="button" data-lang="ckb" class="px-2">کوردی</button>
+                    <span aria-hidden="true">/</span>
+                    <button type="button" data-lang="ar" class="px-2">عربي</button>
+                </div>
+                <a class="hidden border border-gold/70 px-5 py-2.5 text-sm uppercase tracking-[0.18em] text-gold hover:bg-gold hover:text-white sm:inline-block" href="#contact" data-en="Contact us" data-ckb="پەیوەندی" data-ar="تواصل معنا">Contact us</a>
+                <button id="menu-btn" type="button" class="grid h-10 w-10 place-items-center border border-ink/15 md:hidden" aria-expanded="false" aria-controls="menu">
+                    <span class="sr-only">Menu</span>
+                    <span class="block h-px w-4 bg-ink"></span>
+                    <span class="mt-1.5 block h-px w-4 bg-ink"></span>
+                </button>
+            </div>
+        </div>
+        <div id="menu" class="pattern hidden border-t border-ink/10 md:hidden">
+            <div class="flex flex-col px-5 py-4 text-lg">
+                <a class="py-2" href="#station" data-en="Station" data-ckb="بەنزینخانە" data-ar="المحطة">Station</a>
+                <a class="py-2" href="#services" data-en="Coffee" data-ckb="قاوە" data-ar="القهوة">Coffee</a>
+                <a class="py-2" href="#group" data-en="The group" data-ckb="گرووپ" data-ar="المجموعة">The group</a>
+                <a class="py-2" href="#visit" data-en="Visit" data-ckb="سەردان" data-ar="زيارة">Visit</a>
+                <a class="mt-2 text-gold" href="#contact" data-en="Contact us" data-ckb="پەیوەندی" data-ar="تواصل معنا">Contact us</a>
+                <div class="mt-3 flex gap-4 text-sm uppercase tracking-[0.16em]">
+                    <button type="button" data-lang="en">EN</button>
+                    <button type="button" data-lang="ckb">کوردی</button>
+                    <button type="button" data-lang="ar">عربي</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="relative flex min-h-[100svh] items-end overflow-hidden">
+            <img id="hero-photo" src="images/station.jpg?v=instagram" alt="High Mountain station on Instagram, yellow canopy and the HM sign" class="absolute inset-0 h-full w-full object-cover object-[center_42%]" />
+            <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/20"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40"></div>
+            <div class="relative mx-auto w-full max-w-6xl px-5 pb-56 pt-36 sm:pb-36 sm:pt-40">
+                <p class="reveal text-lg uppercase tracking-[0.34em] text-gold" data-en="Sulaymaniyah · Since 2012" data-ckb="سلێمانی · لە &#x200E;2012&#x200E;ەوە" data-ar="السليمانية · منذ 2012">Sulaymaniyah · Since 2012</p>
+                <h1 class="reveal reveal-2 mt-5 max-w-3xl font-display text-5xl font-bold leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
+                    <span class="block" data-en="The forecourt" data-ckb="بەنزینخانەکەمان" data-ar="المحطة">The forecourt</span>
+                    <span class="block text-paper/90" data-en="stays open." data-ckb="هەموو کات کراوەیە" data-ar="تبقى مفتوحة.">stays open.</span>
+                </h1>
+                <p class="reveal reveal-3 mt-6 max-w-xl text-base leading-relaxed text-paper/80 sm:text-lg" data-en="High Mountain Group runs two fuel stations in Sulaymaniyah. Goizha and Bakhtyary are both on Malik Mahmud Ring Road. Both stay open every hour, and the petrol is kept to a standard that looks after the car." data-ckb="گروپی های ماونتن دوو لقی بەنزینخانە لە شاری سلێمانی بەڕێوە دەبات. هەردوو لقەکە دەکەونە سەر شەقامی بازنەی مەلیک مەحمود لە گۆیژە و بەختیاری. بەنزینخانەکانمان ٢٤ کاتژمێر کراوەن، بەنزینەکانمان بە بەرزترین کوالێتی پێشکەش دەکەین." data-ar="تدير مجموعة هاي ماونتن محطتي وقود في السليمانية. كويزة وبختياري كلتاهما على طريق مالك محمود الدائري. كلتاهما مفتوحتان كل ساعة، ويُحفظ البنزين بمعيار يحمي السيارة.">High Mountain Group runs two fuel stations in Sulaymaniyah. Goizha and Bakhtyary are both on Malik Mahmud Ring Road. Both stay open every hour, and the petrol is kept to a standard that looks after the car.</p>
+                <div class="reveal reveal-3 mt-8 flex flex-wrap gap-3">
+                    <a class="bg-scarlet px-5 py-3 text-xs uppercase tracking-[0.2em] text-white hover:bg-ink" href="#visit" data-en="Visit the stations" data-ckb="سەردانی بەنزینخانەکان" data-ar="زر المحطتين">Visit the stations</a>
+                    <a class="border border-paper/30 px-5 py-3 text-xs uppercase tracking-[0.2em] hover:border-gold hover:text-gold" href="tel:+9647701521683" data-en="Call" data-ckb="تەلەفۆن" data-ar="اتصل">Call</a>
+                </div>
+            </div>
+            <div class="absolute inset-x-0 bottom-0 border-t border-paper/15 bg-ink/50 backdrop-blur-md">
+                <div class="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-paper/10 px-5 sm:grid-cols-2 sm:divide-x sm:divide-y-0 rtl:sm:divide-x-reverse">
+                    <p class="py-6 text-2xl"><bdi class="font-display text-gold" dir="ltr" data-en="24/7" data-ckb="24/7" data-ar="24/7">24/7</bdi></p>
+                    <div class="py-5 text-lg leading-8 sm:px-8">
+                        <p><bdi class="text-gold" dir="ltr">1-</bdi> <span data-en="Goizha, Malik Mahmud Ring Road" data-ckb="گۆیژە، شەقامی بازنەی مەلیک مەحمود" data-ar="كويزة، طريق مالك محمود الدائري">Goizha, Malik Mahmud Ring Road</span></p>
+                        <p><bdi class="text-gold" dir="ltr">2-</bdi> <span data-en="Bakhtyary, Malik Mahmud Ring Road" data-ckb="بەختیاری، شەقامی بازنەی مەلیک مەحمود" data-ar="بختياري، طريق مالك محمود الدائري">Bakhtyary, Malik Mahmud Ring Road</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="station" class="pattern text-ink">
+            <div class="rise mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-12">
+                <div class="md:col-span-4">
+                    <p class="text-lg uppercase tracking-[0.32em] text-scarlet" data-en="The station" data-ckb="بەنزینخانە" data-ar="المحطة">The station</p>
+                    <h2 class="mt-4 font-display text-4xl font-bold leading-none tracking-tight sm:text-5xl" data-en="Petrol, open every hour." data-ckb="بەنزین، هەموو کاتێک بەردەستە." data-ar="البنزين مفتوح كل ساعة.">Petrol, open every hour.</h2>
+                </div>
+                <div class="grid gap-10 md:col-span-8 md:grid-cols-2">
+                    <article>
+                        <h3 class="font-display text-3xl" data-en="Fuel" data-ckb="بەنزین" data-ar="الوقود">Fuel</h3>
+                        <p class="mt-3 text-lg leading-relaxed text-ink/70 sm:text-xl" data-en="Petrol and diesel on a forecourt that does not close. The group’s stations carry an enhanced fuel across Kurdistan." data-ckb="بەنزین و گازۆیل هەموو کات بەردەستن. بەنزینخانەکانمان بەرزترین کوالێتی لە کوردستان پێشکەش دەکەن." data-ar="بنزين وديزل في محطة لا تُغلق. محطات المجموعة تقدّم وقوداً محسّناً في أنحاء كردستان.">Petrol and diesel on a forecourt that does not close. The group’s stations carry an enhanced fuel across Kurdistan.</p>
+                    </article>
+                    <article>
+                        <h3 class="font-display text-3xl" data-en="The road" data-ckb="شوێن" data-ar="الطريق">The road</h3>
+                        <p class="mt-3 text-lg leading-relaxed text-ink/70 sm:text-xl" data-en="Two forecourts on Malik Mahmud Ring Road. One in Goizha, one in Bakhtyary." data-ckb="دوو بەنزینخانە لە شەقامی بازنەی مەلیک مەحمود. یەکێک لە گۆیژە، یەکێک لە بەختیاری." data-ar="محطتان على طريق مالك محمود الدائري. واحدة في كويزة، وأخرى في بختياري.">Two forecourts on Malik Mahmud Ring Road. One in Goizha, one in Bakhtyary.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="bg-ink">
+            <div class="mx-auto w-full max-w-[100rem] px-4 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+                <div class="rise flex items-end justify-between gap-6">
+                    <div>
+                        <p class="text-lg uppercase tracking-[0.32em] text-gold" data-en="On the forecourt" data-ckb="لە بەنزینخانە" data-ar="في المحطة">On the forecourt</p>
+                        <h2 class="mt-4 font-display text-4xl font-bold leading-none sm:text-5xl lg:text-6xl" data-en="Fuel, and coffee." data-ckb="بەنزین، و قاوە." data-ar="الوقود، والقهوة.">Fuel, and coffee.</h2>
+                    </div>
+                </div>
+                <div class="mt-10 grid gap-4 md:grid-cols-2 lg:mt-14 lg:gap-6">
+                    <article class="rise rise-2 group relative min-h-[24rem] overflow-hidden md:min-h-[34rem] lg:min-h-[42rem]">
+                        <img src="images/cafe.jpg" alt="Café counter with an espresso machine and a gold lamp" class="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6 lg:p-10">
+                            <p class="text-lg uppercase tracking-[0.28em] text-gold">Café Bonjour</p>
+                            <h3 class="mt-2 font-display text-3xl sm:text-4xl lg:text-5xl" data-en="Coffee" data-ckb="قاوە" data-ar="قهوة">Coffee</h3>
+                            <p class="mt-3 max-w-md text-base text-paper/75" data-en="Café Bonjour serves coffee at Goizha and Bakhtyary." data-ckb="کافێ بۆنژوور لە گۆیژە و بەختیاری قاوە پێشکەش دەکات." data-ar="يقدّم مقهى بونجور القهوة في كويزة وبختياري.">Café Bonjour serves coffee at Goizha and Bakhtyary.</p>
+                        </div>
+                    </article>
+                    <article class="rise rise-3 group relative overflow-hidden text-white">
+                        <img src="images/bakhtyary.jpg?v=full" alt="High Mountain pumps under the yellow canopy" class="block h-auto w-full transition duration-700 ease-out group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6 lg:p-10">
+                            <p class="text-lg uppercase tracking-[0.28em] text-gold" data-en="Fuel" data-ckb="بەنزین" data-ar="الوقود">Fuel</p>
+                            <h3 class="mt-2 font-display text-3xl leading-none sm:text-4xl lg:text-5xl" data-en="Quality that keeps the car." data-ckb="کوالێتییەک کە ئۆتۆمبێلەکە دەپارێزێت." data-ar="جودة تحمي السيارة.">Quality that keeps the car.</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="group" class="pattern text-ink">
+            <div class="mx-auto max-w-6xl px-5 py-24">
+                <article class="rise border border-ink/10 bg-white/80 p-6 sm:p-10 lg:p-14">
+                    <p class="text-lg uppercase tracking-[0.32em] text-scarlet" data-en="The group" data-ckb="گرووپ" data-ar="المجموعة">The group</p>
+                    <div class="mt-6 space-y-6 text-xl leading-relaxed text-ink/80 sm:text-2xl">
+                        <p data-en="Established in 2012, High Mountain is a growing company with a strong presence in both local and international markets. Built on the principles of trust, integrity, and reliability, we are committed to delivering high-quality services while building lasting relationships with our customers and business partners." data-ckb="های ماونتن لە ساڵی &#x200E;2012&#x200E; دامەزراوە. کۆمپانیایەکی گەشەسەندووە و بوونی بەهێزی هەیە لە سلێمانی و لە دەرەوەی وڵات. لەسەر بنەمای متمانە، ڕاستگۆیی بنیاتنراوە. پابەندین خزمەتێکی باش پێشکەش بکەین و پەیوەندییەکی درێژ لەگەڵ کڕیار و هاوبەشە بازرگانییەکانمان دروست دەکەین." data-ar="تأسست هاي ماونتن عام 2012، وهي شركة نامية ذات حضور قوي في السوقين المحلي والدولي. قامت على مبادئ الثقة والنزاهة والموثوقية، ونحن ملتزمون بتقديم خدمات عالية الجودة وبناء علاقات طويلة الأمد مع عملائنا وشركائنا في العمل.">Established in 2012, High Mountain is a growing company with a strong presence in both local and international markets. Built on the principles of trust, integrity, and reliability, we are committed to delivering high-quality services while building lasting relationships with our customers and business partners.</p>
+                        <p data-en="With a diversified business portfolio and a strong foundation in the petroleum sector, High Mountain owns and operates a chain of fuel stations, serving customers with a commitment to quality, efficiency, and dependable service." data-ckb="های ماونتن چەند کارێکی جیاواز دەکات، بناغەیەکی بەهێزی لە بواری نەوتدا هەیە. خاوەنی زنجیرە بەنزینخانەیە و خۆی بەڕێوەیان دەبات. بە کوالێتی، کارکردنی خێرا، و خزمەتێک کە پشتی پێ دەبەسترێت، خزمەتی کڕیار دەکات." data-ar="بمحفظة أعمال متنوعة وأساس راسخ في قطاع النفط، تمتلك هاي ماونتن سلسلة محطات وقود وتديرها، وتخدم الزبائن بالتزام بالجودة والكفاءة والخدمة التي يُعتمد عليها.">With a diversified business portfolio and a strong foundation in the petroleum sector, High Mountain owns and operates a chain of fuel stations, serving customers with a commitment to quality, efficiency, and dependable service.</p>
+                        <p data-en="Over the years, we have continued to expand our operations, strengthen our partnerships, and explore new opportunities across local and international markets." data-ckb="ساڵ بە ساڵ کارەکانمان گەورەتر کردووە، هاوبەشییەکانمان بەهێزتر کردووە، لە سلێمانی و دەرەوەی وڵات بەدوای کاری نوێدا دەگەڕێین." data-ar="وعلى مرّ السنوات، واصلنا توسيع أعمالنا وتعزيز شراكاتنا والبحث عن فرص جديدة في الأسواق المحلية والدولية.">Over the years, we have continued to expand our operations, strengthen our partnerships, and explore new opportunities across local and international markets.</p>
+                        <p data-en="At High Mountain, we believe that long-term success is built through professionalism, transparency, and a continuous commitment to excellence." data-ckb="لە های ماونتن بڕوامان وایە سەرکەوتن بۆ ماوەیەکی درێژ بە پرۆفیشناڵی، شەفافیەت، پابەندبوونی بەردەوام بە باشترین کار بنیات دەنرێت." data-ar="في هاي ماونتن نؤمن بأن النجاح طويل الأمد يُبنى بالمهنية والشفافية والالتزام المستمر بالتميّز.">At High Mountain, we believe that long-term success is built through professionalism, transparency, and a continuous commitment to excellence.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="visit" class="pattern text-ink">
+            <div class="mx-auto max-w-6xl px-5 py-24">
+                <div class="rise">
+                <p class="text-lg uppercase tracking-[0.32em] text-scarlet" data-en="Visit" data-ckb="سەردان" data-ar="زيارة">Visit</p>
+                <h2 class="mt-4 max-w-3xl font-display text-4xl font-bold leading-none sm:text-5xl" data-en="Two stations in Sulaymaniyah." data-ckb="دوو بەنزینخانە لە سلێمانی." data-ar="محطتان في السليمانية.">Two stations in Sulaymaniyah.</h2>
+                <p class="mt-4 max-w-xl text-ink/70" data-en="Both stay open every hour. Tap Directions for the route." data-ckb="هەردووکیان هەموو کاتێک کراوەن. بۆ ڕێگا، ئاراستە لێبدە." data-ar="كلتاهما مفتوحتان كل ساعة. اضغط الاتجاهات للطريق.">Both stay open every hour. Tap Directions for the route.</p>
+                </div>
+                <div class="mt-12 grid gap-6 sm:grid-cols-2">
+                    <article class="rise rise-2 group relative overflow-hidden text-white">
+                        <img src="images/azadi.jpg?v=3" alt="High Mountain fuel station in Goizha, yellow canopy and HM pumps" class="block h-auto w-full transition duration-700 ease-out group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent transition duration-700 group-hover:via-black/20"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <p class="font-display text-sm text-gold">01</p>
+                            <h3 class="mt-3 font-display text-3xl" data-en="Goizha" data-ckb="گۆیژە" data-ar="كويزة">Goizha</h3>
+                            <p class="mt-2 text-sm text-white/80" data-en="Malik Mahmud Ring Road, Sulaymaniyah." data-ckb="شەقامی بازنەی مەلیک مەحمود، سلێمانی." data-ar="طريق مالك محمود الدائري، السليمانية.">Malik Mahmud Ring Road, Sulaymaniyah.</p>
+                            <p class="mt-3 text-xs uppercase tracking-[0.18em] text-scarlet">Café Bonjour</p>
+                            <div class="mt-6 flex justify-end border-t border-white/25 pt-4">
+                                <a class="bg-white px-5 py-3 text-xs uppercase tracking-[0.18em] text-ink transition hover:bg-scarlet hover:text-white" href="https://www.google.com/maps/dir/?api=1&amp;destination=35.561453,45.473316&amp;travelmode=driving" data-dest="35.561453,45.473316" data-en="Directions" data-ckb="ئاراستە" data-ar="الاتجاهات">Directions</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="rise rise-3 group relative overflow-hidden text-white">
+                        <img src="images/bakhtyary.jpg?v=2" alt="High Mountain fuel station in Bakhtyary, yellow canopy and HM pumps" class="block h-auto w-full transition duration-700 ease-out group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent transition duration-700 group-hover:via-black/20"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <p class="font-display text-sm text-gold">02</p>
+                            <h3 class="mt-3 font-display text-3xl" data-en="Bakhtyary" data-ckb="بەختیاری" data-ar="بختياري">Bakhtyary</h3>
+                            <p class="mt-2 text-sm text-white/80" data-en="Malik Mahmud Ring Road, Sulaymaniyah." data-ckb="شەقامی بازنەی مەلیک مەحمود، سلێمانی." data-ar="طريق مالك محمود الدائري، السليمانية.">Malik Mahmud Ring Road, Sulaymaniyah.</p>
+                            <p class="mt-3 text-xs uppercase tracking-[0.18em] text-scarlet">Café Bonjour</p>
+                            <div class="mt-6 flex justify-end border-t border-white/25 pt-4">
+                                <a class="bg-white px-5 py-3 text-xs uppercase tracking-[0.18em] text-ink transition hover:bg-scarlet hover:text-white" href="https://www.google.com/maps/dir/?api=1&amp;destination=35.5673544,45.3903206&amp;travelmode=driving" data-dest="35.5673544,45.3903206" data-en="Directions" data-ckb="ئاراستە" data-ar="الاتجاهات">Directions</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="social" class="pattern border-t border-black/10 text-ink">
+            <div class="mx-auto max-w-6xl px-5 py-24">
+                <p class="rise text-lg uppercase tracking-[0.32em] text-scarlet" data-en="Follow" data-ckb="فۆڵۆو" data-ar="تابعونا">Follow</p>
+                <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                    <a class="rise rise-2 group min-w-0 border border-ink/10 bg-white/80 p-8 transition hover:border-scarlet" href="https://www.instagram.com/highmountaingroup/">
+                        <svg class="h-8 w-8 text-scarlet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                            <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                            <circle cx="12" cy="12" r="3.6" />
+                            <circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none" />
+                        </svg>
+                        <p class="mt-6 text-lg uppercase tracking-[0.2em] text-ink/50 group-hover:text-scarlet" data-en="Instagram" data-ckb="ئینستاگرام" data-ar="إنستغرام">Instagram</p>
+                        <p class="mt-2 whitespace-nowrap font-display text-base"><bdi dir="ltr">@highmountaingroup</bdi></p>
+                    </a>
+                    <a class="rise rise-3 group min-w-0 border border-ink/10 bg-white/80 p-8 transition hover:border-scarlet" href="https://www.facebook.com/hmgr.org/">
+                        <svg class="h-8 w-8 text-scarlet" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M14 8.5h2.6V5.2H14c-2.4 0-4 1.7-4 4.2v2.1H7.6V15H10v6.2h3.2V15h2.5l.4-3.5h-2.9v-1.6c0-.7.3-1.4 1.8-1.4z" />
+                        </svg>
+                        <p class="mt-6 text-lg uppercase tracking-[0.2em] text-ink/50 group-hover:text-scarlet" data-en="Facebook" data-ckb="فەیسبووک" data-ar="فيسبوك">Facebook</p>
+                        <p class="mt-2 whitespace-nowrap font-display text-base"><bdi dir="ltr">hmgr.org</bdi></p>
+                    </a>
+                    <a class="rise group min-w-0 border border-ink/10 bg-white/80 p-8 transition hover:border-scarlet" href="https://www.tiktok.com/@highmountain24">
+                        <svg class="h-8 w-8 text-scarlet" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M14.2 3.2c.5 2.4 1.8 4.1 4.3 4.6v2.5a7 7 0 0 1-4.1-1.3v6.4c0 3.3-2.6 5.9-5.9 5.9S2.6 18.7 2.6 15.4c0-3.2 2.5-5.8 5.6-5.9v2.6a3.3 3.3 0 0 0-2.4 3.2 3.3 3.3 0 0 0 3.3 3.3 3.3 3.3 0 0 0 3.3-3.3V3.2h1.8z" />
+                        </svg>
+                        <p class="mt-6 text-lg uppercase tracking-[0.2em] text-ink/50 group-hover:text-scarlet" data-en="TikTok" data-ckb="تیکتۆک" data-ar="تيك توك">TikTok</p>
+                        <p class="mt-2 whitespace-nowrap font-display text-base"><bdi dir="ltr">@highmountain24</bdi></p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="pattern border-t border-black/10 text-ink">
+        <div class="mx-auto grid max-w-6xl items-center gap-8 px-5 py-14 lg:grid-cols-3 lg:gap-6 lg:py-10">
+            <div class="flex items-center gap-3">
+                <svg class="mark h-16 w-[5.1rem] shrink-0 lg:h-20 lg:w-[6.4rem]" viewBox="788 282 270 213" aria-hidden="true">
+                    <path fill="#FF2929" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                    <path fill="#FF2929" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                </svg>
+                <span class="font-logo text-xl font-extrabold leading-[0.88] tracking-[-0.03em] lg:text-[28px]">
+                    <span class="block" data-en="HIGH" data-ckb="های" data-ar="هاي">HIGH</span>
+                    <span class="block" data-en="MOUNTAIN" data-ckb="ماونتن" data-ar="ماونتن">MOUNTAIN</span>
+                </span>
+            </div>
+            <div class="text-lg leading-8 text-ink/70 lg:text-center">
+                <p><bdi class="text-scarlet" dir="ltr">1-</bdi> <span data-en="Goizha, Malik Mahmud Ring Road" data-ckb="گۆیژە، شەقامی بازنەی مەلیک مەحمود" data-ar="كويزة، طريق مالك محمود الدائري">Goizha, Malik Mahmud Ring Road</span></p>
+                <p><bdi class="text-scarlet" dir="ltr">2-</bdi> <span data-en="Bakhtyary, Malik Mahmud Ring Road" data-ckb="بەختیاری، شەقامی بازنەی مەلیک مەحمود" data-ar="بختياري، طريق مالك محمود الدائري">Bakhtyary, Malik Mahmud Ring Road</span></p>
+            </div>
+            <div class="flex w-fit flex-col items-start gap-5 justify-self-start lg:items-end lg:justify-self-end">
+                <div class="flex flex-col items-start gap-2 lg:items-end">
+                    <a class="text-base text-scarlet hover:underline" href="tel:+9647701521683"><bdi dir="ltr">0770 152 1683</bdi></a>
+                    <a class="text-base text-scarlet hover:underline" href="mailto:Goran@hmgr.org"><bdi dir="ltr">Goran@hmgr.org</bdi></a>
+                </div>
+                <div class="flex flex-col items-start gap-2 lg:items-end">
+                    <a class="text-base text-scarlet hover:underline" href="tel:+9647701526776"><bdi dir="ltr">0770 152 6776</bdi></a>
+                    <a class="text-base text-scarlet hover:underline" href="mailto:arya.shwan@hmgr.org"><bdi dir="ltr">arya.shwan@hmgr.org</bdi></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const intro = document.getElementById("intro");
+        if (intro) intro.addEventListener("animationend", (event) => {
+            if (event.animationName === "intro-leave") intro.remove();
+        });
+
+        const nodes = document.querySelectorAll("[data-en]");
+        const langButtons = document.querySelectorAll("[data-lang]");
+        function apply(lang) {
+            const key = lang === "ckb" || lang === "ar" ? lang : "en";
+            document.documentElement.lang = key;
+            document.documentElement.dir = key === "en" ? "ltr" : "rtl";
+            nodes.forEach((node) => {
+                const value = node.getAttribute("data-" + key);
+                if (value) node.textContent = value;
+            });
+            langButtons.forEach((button) => {
+                const on = button.getAttribute("data-lang") === key;
+                button.classList.toggle("text-ink", on);
+                button.classList.toggle("text-gold", on);
+                button.setAttribute("aria-pressed", on ? "true" : "false");
+            });
+            try { localStorage.setItem("hm-lang", key); } catch (e) {}
+        }
+        langButtons.forEach((button) => button.addEventListener("click", () => apply(button.getAttribute("data-lang"))));
+        let saved = "en";
+        try { saved = localStorage.getItem("hm-lang") || "en"; } catch (e) {}
+        if (saved === "ckb" || saved === "ar") apply(saved);
+
+        const bar = document.getElementById("topbar");
+        const hero = document.getElementById("hero-photo");
+        const menu = document.getElementById("menu");
+        const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let lastY = window.scrollY;
+        let scrollDir = 1;
+        const onScroll = () => {
+            const y = window.scrollY;
+            if (y < lastY - 4) scrollDir = -1;
+            else if (y > lastY + 4) scrollDir = 1;
+            bar.classList.toggle("nav-solid", y > 12);
+            const menuOpen = menu && !menu.classList.contains("hidden");
+            if (y < 40 || menuOpen || y < lastY - 4) bar.classList.remove("nav-away");
+            else if (y > lastY + 4) bar.classList.add("nav-away");
+            lastY = y;
+            if (hero && !still) {
+                const shift = Math.min(y * 0.28, 220);
+                hero.style.transform = "scale(1.14) translateY(" + shift + "px)";
+            }
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        const linesOf = (el) => el.querySelectorAll("h1, h2, h3, p");
+        const showLines = (el) => {
+            linesOf(el).forEach((node, i) => {
+                node.style.transitionDelay = (0.16 + i * 0.08) + "s";
+            });
+            el.classList.add("in");
+        };
+        const hideLines = (el) => {
+            const nodes = linesOf(el);
+            nodes.forEach((node, i) => {
+                node.style.transitionDelay = ((nodes.length - 1 - i) * 0.06) + "s";
+            });
+            el.classList.remove("in");
+        };
+        if (!still && "IntersectionObserver" in window) {
+            const seen = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const below = entry.boundingClientRect.top > 0;
+                    if (entry.isIntersecting) {
+                        if (!entry.target.classList.contains("in")) showLines(entry.target);
+                    } else if (scrollDir < 0 && below) {
+                        hideLines(entry.target);
+                    }
+                });
+            }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+            document.querySelectorAll(".rise").forEach((el) => seen.observe(el));
+        } else {
+            document.querySelectorAll(".rise").forEach(showLines);
+        }
+
+        const menuBtn = document.getElementById("menu-btn");
+        menuBtn.addEventListener("click", () => {
+            const open = menu.classList.toggle("hidden") === false;
+            menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+            menu.classList.add("hidden");
+            menuBtn.setAttribute("aria-expanded", "false");
+        }));
+
+        document.querySelectorAll("[data-dest]").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                if (!navigator.geolocation) return;
+                event.preventDefault();
+                const dest = link.getAttribute("data-dest");
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    const here = pos.coords.latitude.toFixed(6) + "," + pos.coords.longitude.toFixed(6);
+                    window.location.assign("https://www.google.com/maps/dir/?api=1&origin=" + here + "&destination=" + dest + "&travelmode=driving");
+                }, () => {
+                    window.location.assign(link.href);
+                }, { enableHighAccuracy: true, maximumAge: 0, timeout: 12000 });
+            });
+        });
+    </script>
+</body>
+</html>

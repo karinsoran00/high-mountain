@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Intro choices · High Mountain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Outfit:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; background: #111; color: #fff; font-family: Outfit, sans-serif; }
+        .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; background: rgba(0,0,0,.72); }
+        button { border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; padding: 10px 14px; font: 500 14px Outfit, sans-serif; cursor: pointer; }
+        button.on { background: #FF2929; border-color: #FF2929; }
+        .stage { position: fixed; inset: 0; display: grid; place-items: center; background: #fff; color: #000; }
+        .stage.dark { background: #000; color: #fff; }
+        .lockup { display: flex; align-items: center; gap: 14px; }
+        .mark { width: 92px; height: 74px; display: block; }
+        .words { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 28px; line-height: .88; letter-spacing: -.03em; }
+        .words span { display: block; }
+        .hint { position: fixed; top: 24px; left: 24px; z-index: 4; max-width: 280px; color: #fff; mix-blend-mode: difference; }
+        .hint b { display: block; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+        .hint p { margin: 6px 0 0; font-size: 15px; line-height: 1.4; }
+
+        .draw .stroke { fill: none; stroke: #FF2929; stroke-width: 8; stroke-linejoin: round; stroke-linecap: round; }
+        .draw .solid, .draw .words, .rise .mark, .rise .words, .stamp .mark, .stamp .words, .settle .mark, .settle .words { opacity: 0; }
+        .run.draw .stroke { stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw .9s ease forwards; }
+        .run.draw .solid { animation: fade .35s ease .85s forwards; }
+        .run.draw .words { transform: translateY(10px); animation: up .45s ease 1s forwards; }
+        .run.draw.done { animation: veil .45s ease 2.1s forwards; }
+
+        .run.rise .mark { transform: translateY(28px); animation: up .7s cubic-bezier(.2,.7,.2,1) forwards; }
+        .run.rise .words { transform: translateY(18px); animation: up .6s cubic-bezier(.2,.7,.2,1) .18s forwards; }
+        .run.rise.done { animation: veil .45s ease 1.7s forwards; }
+
+        .run.stamp .mark { transform: scale(1.7); animation: stamp .55s cubic-bezier(.2,.8,.2,1) forwards; }
+        .run.stamp .words { clip-path: inset(0 100% 0 0); animation: wipe .45s ease .4s forwards; }
+        .run.stamp.done { animation: veil .4s ease 1.6s forwards; }
+
+        .settle { background: #fff; }
+        .run.settle .lockup { animation: tobar 1.7s cubic-bezier(.6,0,.2,1) .7s forwards; }
+        .run.settle .mark, .run.settle .words { animation: fade .3s ease forwards; }
+        .fakebar { position: absolute; top: 0; left: 0; right: 0; height: 72px; border-bottom: 1px solid rgba(0,0,0,.08); opacity: 0; }
+        .run.settle .fakebar { animation: fade .4s ease 1.5s forwards; }
+
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        @keyframes fade { to { opacity: 1; } }
+        @keyframes up { to { opacity: 1; transform: none; } }
+        @keyframes stamp { to { opacity: 1; transform: none; } }
+        @keyframes wipe { to { opacity: 1; clip-path: inset(0 0 0 0); } }
+        @keyframes veil { to { opacity: 0; visibility: hidden; } }
+        @keyframes tobar {
+            to { transform: translate(-42vw, -42vh) scale(.42); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .run .mark, .run .words, .run .solid, .run .stroke, .run.settle .lockup, .run.settle .fakebar { animation: none !important; opacity: 1; transform: none; clip-path: none; stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body>
+    <p class="hint" id="hint"><b>Choose an intro</b><span id="line">Press a number. It plays once, the way it would when the page opens.</span></p>
+    <div class="stage" id="stage"></div>
+    <div class="bar">
+        <button type="button" data-n="1">1 · Draw</button>
+        <button type="button" data-n="2">2 · Rise</button>
+        <button type="button" data-n="3">3 · Stamp</button>
+        <button type="button" data-n="4">4 · Move to the top</button>
+    </div>
+    <template id="logo">
+        <div class="lockup">
+            <svg class="mark" viewBox="788 282 270 213" aria-hidden="true">
+                <g class="line">
+                    <path class="stroke" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                    <path class="stroke" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                </g>
+                <g class="solid">
+                    <path fill="#FF2929" d="M788.08 432.31L870.2 348.22L922.85 282.6L968.83 339.97L1056.84 432.31L936.61 359.22L931.5 354.11L954.29 413.44L893.78 383.19Z" />
+                    <path fill="#FF2929" d="M983.89 474.4C963.58 468.13 942.68 464.96 921.76 464.96C904.25 464.96 886.35 467.18 868.56 471.57L868.33 471.62L795.75 494.02L789.35 470.22L863.96 445.72C882.83 439.96 902.21 437.04 921.56 437.04C942.29 437.04 962.96 440.39 982.99 446.99L1053.66 470.23L1047.28 494.04Z" />
+                </g>
+            </svg>
+            <span class="words"><span>HIGH</span><span>MOUNTAIN</span></span>
+        </div>
+    </template>
+    <script>
+        const stage = document.getElementById("stage");
+        const logo = document.getElementById("logo");
+        const line = document.getElementById("line");
+        const notes = {
+            1: "The mountain is drawn, then it fills red, then the name appears. The screen fades.",
+            2: "The logo rises into place. Quiet, and short.",
+            3: "The mountain lands firmly, then the name wipes in. Dark screen.",
+            4: "The logo appears in the middle, then moves up to the corner where it lives on the page."
+        };
+        const kinds = { 1: "draw", 2: "rise", 3: "stamp", 4: "settle" };
+        function play(n) {
+            document.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.n === String(n)));
+            line.textContent = notes[n];
+            stage.className = "stage " + kinds[n] + (n === "3" ? " dark" : "");
+            stage.replaceChildren(logo.content.cloneNode(true));
+            if (n === "4") {
+                const bar = document.createElement("div");
+                bar.className = "fakebar";
+                stage.append(bar);
+            }
+            void stage.offsetWidth;
+            stage.classList.add("run", "done");
+        }
+        document.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => play(b.dataset.n)));
+    </script>
+</body>
+</html>
